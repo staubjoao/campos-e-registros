@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 
 int input(char str[], int size)
 {
@@ -35,6 +36,7 @@ int main()
     saida = fopen(nomeArq, "w");
     if(saida==NULL)
         printf("O arquivo %s não pode ser aberto", nomeArq);
+        return EXIT_FAILURE;
 
     fflush(stdin);
     while(input(sobrenome, 20)>0)
@@ -63,4 +65,6 @@ int main()
         fputs("|", saida);
     }
     fclose(saida);
+
+    return EXIT_SUCCESS;
 }

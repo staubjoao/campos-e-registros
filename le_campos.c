@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 
 int leia(char str[], int size, FILE *entrada)
 {
@@ -31,6 +32,7 @@ int main()
     entrada = fopen(nomeArq, "r");
     if(entrada==NULL)
         printf("O arquivo %s não pode ser aberto", nomeArq);
+        return EXIT_FAILURE;
 
     while(leia(string, 20, entrada)>0)
     {
@@ -39,5 +41,5 @@ int main()
     }
 
     fclose(entrada);
-    return 0;
+    return EXIT_SUCCESS;
 }

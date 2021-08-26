@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 #include<string.h>
 
 int input(char str[], int size)
@@ -35,6 +36,7 @@ int main()
     saida = fopen(nomeArq, "wb");
     if(saida==NULL)
         printf("O arquivo %s não pode ser aberto", nomeArq);
+        return EXIT_FAILURE;
 
 
     printf("Informe o sobrenome: ");
@@ -63,4 +65,5 @@ int main()
     }
 
     fclose(saida);
+    return EXIT_SUCCESS;
 }
