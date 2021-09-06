@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "util.h"
 
-int leia(char str[], int size, FILE *entrada)
+int leiaCampo(char str[], int size, FILE *entrada)
 {
     int i = 0;
     char c = fgetc(entrada);
@@ -37,7 +37,7 @@ int main()
         return EXIT_FAILURE;
     }
 
-    while (leia(string, 20, entrada) > 0)
+    while (leiaCampo(string, 20, entrada) > 0)
     {
         printf("campo #%i: %s\n", cont, string);
         cont++;

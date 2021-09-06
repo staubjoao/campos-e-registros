@@ -4,31 +4,17 @@
 #include <stdbool.h>
 #include "util.h"
 
-int leia(char buffer[], int size, FILE *entrada)
-{
-    int i = 0;
-    short num;
-    fread(&num, sizeof(short), 1, entrada);
-
-    if (feof(entrada) != 0)
-        return 0;
-    if (num < size)
-    {
-        fread(buffer, sizeof(char), num, entrada);
-        buffer[num] = '\0';
-        return num;
-    }
-    else
-        return 0;
-}
-
 int main()
 {
     FILE *entrada;
     char nomeArq[20];
-    char sobrenome[20];
+    char sobrenomeBusca[20];
+    char *sobrenome;
+    char *campo;
+    int cont = 1;
     char buffer[134];
     bool achou = false;
+    int compReg = leia(buffer, 134, entrada);
 
     printf("Informe o nome do arquivo: ");
     input(nomeArq, 20);
@@ -40,5 +26,34 @@ int main()
     }
 
     printf("Informe o sobrenome que deseja buscar: ");
-    input(sobrenome, 20);
+    input(sobrenomeBusca, 20);
+
+    while (achou && compReg > 0)
+    {
+        sobrenome = strtok(NULL, "|");
+        if (strcmp(sobrenome, sobrenomeBusca))
+        {
+            achou = true;
+        }
+        else
+        {
+            compReg = leia(buffer, 134, entrada);
+        }
+    }
+
+    if (achou)
+    {
+        printf("%s\n", sobrenome);
+        campo = strtok(buffer, "|");
+        while (campo != NULL)
+        {
+            printf("Campo %i: %s\n", cont, campo);
+            cont++;
+            campo = strtok(NULL, "|");
+        }
+        leia(buffer, 134, entrada);
+    }
+
+    fclose(entrada);
+    return EXIT_SUCCESS;
 }
