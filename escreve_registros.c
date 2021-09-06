@@ -1,24 +1,8 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-int input(char str[], int size)
-{
-    int i=0;
-    char c=getchar();
-
-    while (c!='\n')
-    {
-        if(i<size-1)
-        {
-            str[i]=c;
-            i++;
-        }
-        c=getchar();
-    }
-    str[i]='\0';
-    return i;
-}
+#include "util.h"
 
 int main()
 {
@@ -27,28 +11,29 @@ int main()
     char nomeArq[20];
     char campo[42];
     char buffer[134];
-    int size;
+    int size, i;
     short num;
-    char *nomeCampos[] = {"nome", "endereço", "cidade", "estado", "CEP"};
+    char *nomeCampos[] = {"nome", "endereï¿½o", "cidade", "estado", "CEP"};
 
     printf("Informe o nome do arquivo: ");
-    scanf("%s", &nomeArq);
+    input(nomeArq, 20);
     saida = fopen(nomeArq, "wb");
-    if(saida==NULL)
-        printf("O arquivo %s não pode ser aberto", nomeArq);
+    if (saida == NULL)
+    {
+        printf("O arquivo %s nï¿½o pode ser aberto", nomeArq);
         return EXIT_FAILURE;
-
+    }
 
     printf("Informe o sobrenome: ");
     fflush(stdin);
     size = input(campo, 42);
-    while(size>0)
+    while (size > 0)
     {
-        buffer[0]= '\0';
+        buffer[0] = '\0';
         strcat(buffer, campo);
         strcat(buffer, "|");
 
-        for(int i=0; i<5; i++)
+        for (i = 0; i < 5; i++)
         {
             printf("Informe o %s: ", nomeCampos[i]);
             input(campo, 42);
@@ -56,7 +41,7 @@ int main()
             strcat(buffer, "|");
         }
 
-        num=strlen(buffer);
+        num = strlen(buffer);
         fwrite(&num, sizeof(short), 1, saida);
         fwrite(buffer, sizeof(char), num, saida);
 

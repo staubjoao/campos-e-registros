@@ -1,21 +1,22 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "util.h"
 
 int leia(char str[], int size, FILE *entrada)
 {
-    int i=0;
-    char c=fgetc(entrada);
+    int i = 0;
+    char c = fgetc(entrada);
 
-    while(c!=EOF&&c!='|')
+    while (c != EOF && c != '|')
     {
-        if(i<=size-1)
+        if (i <= size - 1)
         {
-            str[i]=c;
+            str[i] = c;
             i++;
         }
-        c=fgetc(entrada);
+        c = fgetc(entrada);
     }
-    str[i]='\0';
+    str[i] = '\0';
     return i;
 }
 
@@ -25,16 +26,18 @@ int main()
 
     char nomeArq[20];
     char string[42];
-    int cont=1;
+    int cont = 1;
 
     printf("Informe o nome do arquivo: ");
-    scanf("%s", &nomeArq);
+    input(nomeArq, 20);
     entrada = fopen(nomeArq, "r");
-    if(entrada==NULL)
-        printf("O arquivo %s não pode ser aberto", nomeArq);
+    if (entrada == NULL)
+    {
+        printf("O arquivo %s nÃ£o pode ser aberto", nomeArq);
         return EXIT_FAILURE;
+    }
 
-    while(leia(string, 20, entrada)>0)
+    while (leia(string, 20, entrada) > 0)
     {
         printf("campo #%i: %s\n", cont, string);
         cont++;

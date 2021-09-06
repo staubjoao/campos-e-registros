@@ -1,23 +1,6 @@
-#include<stdio.h>
-#include<stdlib.h>
-
-int input(char str[], int size)
-{
-    int i=0;
-    char c=getchar();
-
-    while (c!='\n')
-    {
-        if(i<size-1)
-        {
-            str[i]=c;
-            i++;
-        }
-        c=getchar();
-    }
-    str[i]='\0';
-    return i;
-}
+#include <stdio.h>
+#include <stdlib.h>
+#include "util.h"
 
 int main()
 {
@@ -32,14 +15,15 @@ int main()
     char cep[9];
 
     printf("Informe o nome do arquivo: ");
-    scanf("%s", &nomeArq);
+    input(nomeArq, 20);
     saida = fopen(nomeArq, "w");
-    if(saida==NULL)
-        printf("O arquivo %s não pode ser aberto", nomeArq);
+    if (saida == NULL)
+    {
+        printf("O arquivo %s nÃ£o pode ser aberto", nomeArq);
         return EXIT_FAILURE;
+    }
 
-    fflush(stdin);
-    while(input(sobrenome, 20)>0)
+    while (input(sobrenome, 20) > 0)
     {
         fputs(sobrenome, saida);
         fputs("|", saida);
