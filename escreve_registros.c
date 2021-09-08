@@ -13,14 +13,14 @@ int main()
     char buffer[134];
     int size, i;
     short num;
-    char *nomeCampos[] = {"nome", "endere�o", "cidade", "estado", "CEP"};
+    char *nomeCampos[] = {"sobrenome", "nome", "endereco", "cidade", "estado", "CEP"};
 
     printf("Informe o nome do arquivo: ");
     input(nomeArq, 20);
     saida = fopen(nomeArq, "wb");
     if (saida == NULL)
     {
-        printf("O arquivo %s n�o pode ser aberto", nomeArq);
+        printf("O arquivo %s nao pode ser aberto", nomeArq);
         return EXIT_FAILURE;
     }
 
@@ -33,7 +33,7 @@ int main()
         strcat(buffer, campo);
         strcat(buffer, "|");
 
-        for (i = 0; i < 5; i++)
+        for (i = 0; i < 6; i++)
         {
             printf("Informe o %s: ", nomeCampos[i]);
             input(campo, 42);
