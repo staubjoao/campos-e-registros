@@ -46,8 +46,7 @@ int main()
         campo = strtok(buffer, "|");
         while (campo != NULL)
         {
-            printf("Campo %i: %s\n", cont, campo);
-            cont++;
+            printf("Campo %i: %s\n", cont++, campo);
             campo = strtok(NULL, "|");
         }
         leia(buffer, 134, entrada);
