@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 #include "util.h"
 
 int main()
@@ -13,9 +12,8 @@ int main()
     char *campo;
     int cont = 1;
     char buffer[134];
-    bool achou = false;
-    int compReg = leia(buffer, 134, entrada);
-
+    int achou = 0;
+    int compReg;
     printf("Informe o nome do arquivo: ");
     input(nomeArq, 20);
     entrada = fopen(nomeArq, "rb");
@@ -24,16 +22,17 @@ int main()
         printf("O arquivo %s não pode ser aberto", nomeArq);
         return EXIT_FAILURE;
     }
+    compReg = leia(buffer, 134, entrada);
 
     printf("Informe o sobrenome que deseja buscar: ");
     input(sobrenomeBusca, 20);
 
-    while (achou && compReg > 0)
+    while (achou == 0 && compReg > 0)
     {
-        sobrenome = strtok(NULL, "|");
-        if (strcmp(sobrenome, sobrenomeBusca))
+        sobrenome = strtok(buffer, "|");
+        if (strcmp(sobrenome, sobrenomeBusca) == 1)
         {
-            achou = true;
+            achou = 1;
         }
         else
         {
@@ -41,9 +40,9 @@ int main()
         }
     }
 
-    if (achou)
+    if (achou == 1)
     {
-        printf("%s\n", sobrenome);
+        printf("%s: \n", sobrenome);
         campo = strtok(buffer, "|");
         while (campo != NULL)
         {
